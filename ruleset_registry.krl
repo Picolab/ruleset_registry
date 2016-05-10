@@ -33,8 +33,8 @@ Ruleset for registering other rulesets
    }
 
    if( passphrase eq expected_pp
-    && ! uri.isnull()
-    && ! rid.isnull()
+    && not uri.isnull()
+    && not rid.isnull()
      ) then 
    {
       

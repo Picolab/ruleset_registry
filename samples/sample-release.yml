@@ -1,0 +1,22 @@
+# used by create_release.pl to prepare a release
+
+prod_rules_engine: cs.kobj.net
+dev_rules_engine: kibdev.kobj.net
+
+# don't publicly distribute this file with keys filled in, you'll be sorry
+aws_key: 
+aws_secret: 
+aws_bucketname: 
+aws_ruleset_dir: /rulesets
+
+# map for dev names to prod names
+
+app_map:
+  sample_foo.krl:
+    dev: b0x243
+    prod: sample_foo
+  sample_bar.krl:
+    dev: b0x32
+    prod: sample_bar
+  
+  

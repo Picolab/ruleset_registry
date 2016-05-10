@@ -26,8 +26,8 @@ Ruleset for registering other rulesets
    select when system new_ruleset_registration
    pre {
      rid = event:attr("new_rid").klog(">>>>  new rid >>>> ");
-     passphrase = event:attr("passphrase").klog(">>>> given pp >>>> ");
-     developer_eci = event:attr("developer_eci").klog(">>>> eci >>>>");
+     passphrase = event:attr("passphrase").klog(">>>> given pp >>>>");
+     developer_eci = event:attr("developer_eci").klog(">>>> eci >>>> ");
      uri = event:attr("new_uri").klog(">>>> uri >>>> ");
      expected_pp = keys:system_credentials("passphrase").klog(">>> pp >>>>");
    }
@@ -50,7 +50,7 @@ Ruleset for registering other rulesets
    }
 
    fired {
-     log ">>>>> created ran >>>>> " + isCreated;
+     log ">>>>> created ran >>>>> " + isCreated.encode();
    }
 
  }

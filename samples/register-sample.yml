@@ -1,0 +1,32 @@
+
+rules_engine: kibdev.kobj.net
+
+# will be prepended to URLs below that don't begin with http(s)
+base_url: http://s3.amazonaws.com/<bucket>/ruleset/<version>
+
+# eci for pico where the accompanying ruleset is installed
+eci: <eci>
+
+# eci (token) for developer who will own these rulesets once registered
+developer_eci: <eci>
+
+# allows calling registration rule
+passphrase: <from the system credentials>
+
+# query domain is the RID of the accompanying ruleset
+query_domain: b16x25
+
+
+# rulesets is an array of hashes. Each hash can contain:
+#   rid - ruleset ID
+#   url - URL of KRL source for this RID. Uses base_url above if doesn't start with http(s)://
+#   version - version to use (defaults to 'prod' if unspecified)
+rulesets:
+  -
+    rid: v1_sample_01
+    url: sample_foo.krl
+  -
+    rid: v1_sample_00
+    url: sample_bar.krl
+
+     

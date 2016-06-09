@@ -115,28 +115,28 @@ while (my $file = readdir(DIR)) {
   # Use a regular expression to ignore files beginning with a period
   next if ($file =~ m/^\./);
   next if ($file !~ m/\.krl$/);
-  print "Versioning: $file\n";
 
   my $newfile = "$target_dir/$file";
 
   if (exists $app_map->{$file}) {
+      print "Versioning: $file\n";
       push @{$flush_rids}, $version_w_sep. $app_map->{$file}->{"prod"} . ".prod";
+
+      open(IN,  "< $file")                     or die "can't open $file: $!";
+      open(OUT, "> $newfile")                  or die "can't open $newfile: $!";
+
+      while (my $line = <IN>) {
+	  $line =~ s/($replacable)/$version_w_sep$name_map->{$1}/g;
+
+	  print OUT $line
+
+      }
+
+      close(IN);
+      close(OUT);
   } else {
-      warn "skipping $file in flush"
+      warn "skipping $file "
   }
-
-  open(IN,  "< $file")                     or die "can't open $file: $!";
-  open(OUT, "> $newfile")                  or die "can't open $newfile: $!";
-
-  while (my $line = <IN>) {
-      $line =~ s/($replacable)/$version_w_sep$name_map->{$1}/g;
-
-      print OUT $line
-
-  }
-
-  close(IN);
-  close(OUT);
 
 }
 

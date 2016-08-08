@@ -120,7 +120,8 @@ foreach my $rline (@{ $rulesets }) {
     my $attrs = {"passphrase" => $passphrase,
 		 "developer_eci" => $developer_eci,
 		 "new_uri" => $url,
-		 "new_rid" => $vrid
+		 "new_rid" => $rid,
+		 "version" => $version
 		};
 
     my $eid = "REGISTRATION_".time;

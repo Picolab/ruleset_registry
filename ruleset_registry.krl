@@ -26,6 +26,10 @@ Ruleset for registering other rulesets
    select when system new_ruleset_registration
    pre {
      rid = event:attr("new_rid").klog(">>>>  new rid >>>> ");
+     version = event:attr("version")
+                .defaultsTo("prod")
+                .klog(">>>> new RID version >>>> ")
+		;
      passphrase = event:attr("passphrase").klog(">>>> given pp >>>>");
      developer_eci = event:attr("developer_eci").klog(">>>> eci >>>> ");
      uri = event:attr("new_uri").klog(">>>> uri >>>> ");
@@ -40,6 +44,7 @@ Ruleset for registering other rulesets
       
       rsm:create(rid) setting (isCreated)
         with owner = developer_eci
+	 and version = version
 	 and uri = uri;
 
       send_directive("ruleset_registered") with

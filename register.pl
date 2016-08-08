@@ -94,23 +94,25 @@ foreach my $rline (@{ $rulesets }) {
 
     my $version = $rline->{"version"} || "prod";
 
+    my $vrid;
+    
     if ($clopt{'d'}) {
 	$rid = $rid . "." . $version;
 	if (! $already_registered->{$rid} ) {
 	    print "Skipping $rid because it's not there \n";
 	    next;
 	} else {
-	    print "Deleting $rid \n";
+	    print "Deleting $rid.version \n";
 	}
     } else {
 	# this is ugly cause right now Kynetx::Modules::RSM::do_create() only creates with .prod and only accepts
         # rids without any version attached. 
-	my $vrid = $rid . "." . $version;
+	$vrid = $rid . "." . $version;
 	if ($already_registered->{$vrid}) {
-	    print "Skipping $rid because it's already registered \n";
+	    print "Skipping $vrid because it's already registered \n";
 	    next;
 	} else {
-	    print "Registering $rid at $url\n";
+	    print "Registering $vrid at $url\n";
 	}
 	
     } 
@@ -118,7 +120,7 @@ foreach my $rline (@{ $rulesets }) {
     my $attrs = {"passphrase" => $passphrase,
 		 "developer_eci" => $developer_eci,
 		 "new_uri" => $url,
-		 "new_rid" => $rid
+		 "new_rid" => $vrid
 		};
 
     my $eid = "REGISTRATION_".time;
